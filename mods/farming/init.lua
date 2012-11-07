@@ -1,4 +1,5 @@
-GRAINS_LIST={
+farming = {}
+farming.grains={
 	"wheat_hard",
 	"wheat_soft",--[[
 	"rye",
@@ -15,8 +16,25 @@ GRAINS_LIST={
 	"teff",
 	"rape",]]
 }
+farming.grains_desc={
+	"Wheat Hard",
+	"Wheat Soft",
+	"Rye",
+	"Rice",
+	"Oast",
+	"Barley",
+	"Maize",
+	"Millet",
+	"Siberian Millet",
+	"Panic",
+	"Payza",
+	"Dagussa",
+	"Buckwheat",
+	"Teff",
+	"Rape",
+}
 --[[
-LEGUMES_LIST={
+farming.legumes={
 	"peas",
 	"beans",
 	"soy_beans",
@@ -30,7 +48,7 @@ LEGUMES_LIST={
 	"sugar_cane",
 }
 
-NUTS_LIST={
+farming.nuts={
 	"walnuts",
 	"black_walnut",
 	"manchurian",
@@ -47,12 +65,11 @@ NUTS_LIST={
 	"coconut",
 }]]
 
-for i=1, #GRAINS_LIST do
-
-	for j=1, 8 do
-	minetest.register_node("farming:"..GRAINS_LIST[i].."_stage_"..j, {
-		description = GRAINS_LIST[i],
-		tiles = {"farming_"..GRAINS_LIST[i].."_"..j..".png"},
+for i, grain in ipairs(farming.grains) do
+	for j = 1,8 do
+	minetest.register_node("farming:"..grain.."_stage_"..j, {
+		description = farming.grains_desc[i],
+		tiles = {"farming_"..grain.."_"..j..".png"},
 		groups = {oddly_breakable_by_hand=2, cracky=3, dig_immediate=1},
 		sounds = default.node_sound_leaves_defaults(),
 		walkable = false,
@@ -80,13 +97,13 @@ for i=1, #GRAINS_LIST do
 	})
 	end
 	
-	minetest.register_craftitem("farming:"..GRAINS_LIST[i].."_seeds", {
-		description = GRAINS_LIST[i].." seeds",
-		inventory_image = "farming_"..GRAINS_LIST[i].."_seeds.png",
+	minetest.register_craftitem("farming:"..grain.."_seeds", {
+		description = farming.grains_desc[i].." Seeds",
+		inventory_image = "farming_"..grain.."_seeds.png",
 	})
 	
-	minetest.register_craftitem("farming:"..GRAINS_LIST[i].."_sheaf", {
-		description = GRAINS_LIST[i].." sheaf",
-		inventory_image = "farming_"..GRAINS_LIST[i].."_sheaf.png",
+	minetest.register_craftitem("farming:"..grain.."_sheaf", {
+		description = farming.grains_desc[i].." Sheaf",
+		inventory_image = "farming_"..grain.."_sheaf.png",
 	})
 end
